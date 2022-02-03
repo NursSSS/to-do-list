@@ -1,6 +1,6 @@
 import { IsDateString, IsOptional, Length } from "class-validator"
 
-export class CreateTaskDto {
+export class UpdateTaskDto{
     @Length(3, 20)
     title: string
 
