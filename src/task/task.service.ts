@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateTaskDto, UpdateTaskDto } from './dto';
@@ -31,5 +31,15 @@ export class TaskService {
         const task = await this.findOne(id)
         Object.assign(task, dto)
         return await task.save()
+    }
+
+    async delete(id: string){
+        const task = await this.entity.findById(id)
+
+        if(!task){
+            throw new NotFoundException()
+        }
+
+        return await this.entity.deleteOne({ task })
     }
 }
