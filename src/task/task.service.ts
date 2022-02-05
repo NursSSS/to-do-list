@@ -34,11 +34,7 @@ export class TaskService {
     }
 
     async delete(id: string){
-        const task = await this.entity.findById(id)
-
-        if(!task){
-            throw new NotFoundException()
-        }
+        const task = await this.findOne(id)
 
         return await this.entity.deleteOne({ task })
     }
